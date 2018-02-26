@@ -27,6 +27,7 @@
 #navitem{
 	text-decoration: blink;
 	color:black;
+	text-transform: uppercase;
 }
 
 #section {
@@ -57,6 +58,9 @@
 #homapagelink{
 	color:#A00000;
 	text-decoration: blink;
+}
+hr{
+	width: 800px;
 }
 /*ul
 {
