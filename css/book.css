@@ -15,9 +15,9 @@
 }
 #nav {
     line-height:2px;
-    background-color:#33CCFF;
-    /*background-color: #FFFF99;*/
-    background-color: #00FFCC;
+    /*background-color:#33CCFF;*/
+    background-color: black;
+    /*background-color: #00FFCC;*/
     padding:2px;
 
 
@@ -27,6 +27,7 @@
 #navitem{
 	text-decoration: blink;
 	color:black;
+	color:yellow;
 	text-transform: uppercase;
 }
 
