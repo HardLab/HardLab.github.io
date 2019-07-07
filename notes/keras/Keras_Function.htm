@@ -1,0 +1,925 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:"Calibri Light";
+	panose-1:2 15 3 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";}
+h1
+	{mso-style-link:"标题 1 Char";
+	margin-top:17.0pt;
+	margin-right:0cm;
+	margin-bottom:16.5pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:240%;
+	page-break-after:avoid;
+	font-size:22.0pt;
+	font-family:"Calibri","sans-serif";}
+h2
+	{mso-style-link:"标题 2 Char";
+	margin-top:13.0pt;
+	margin-right:0cm;
+	margin-bottom:13.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:173%;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:"Calibri Light","sans-serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"页眉 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	layout-grid-mode:char;
+	border:none;
+	padding:0cm;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"页脚 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#954F72;
+	text-decoration:underline;}
+span.Char
+	{mso-style-name:"页眉 Char";
+	mso-style-link:页眉;}
+span.Char0
+	{mso-style-name:"页脚 Char";
+	mso-style-link:页脚;}
+span.2Char
+	{mso-style-name:"标题 2 Char";
+	mso-style-link:"标题 2";
+	font-family:"Calibri Light","sans-serif";
+	font-weight:bold;}
+span.1Char
+	{mso-style-name:"标题 1 Char";
+	mso-style-link:"标题 1";
+	font-weight:bold;}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:841.9pt 595.3pt;
+	margin:36.0pt 36.0pt 36.0pt 36.0pt;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=ZH-CN link="#0563C1" vlink="#954F72" style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://keras.io/layers/convolutional/#convolution2d">convolution2d</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://keras.io/layers/pooling/#maxpooling2d">MaxPooling2D</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://keras.io/layers/core/#dropout">Dropout</a></span></p>
+
+<p class=MsoNormal><span class=MsoHyperlink><span lang=EN-US><span
+ style='text-decoration:none'>&nbsp;</span></span></span></p>
+
+<h2><span lang=EN-US>Convolution2D</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>keras.layers.convolutional.Convolution2D(nb_filter,
+nb_row, nb_col, init='glorot_uniform', activation=<b>None</b>, weights=<b>None</b>,
+border_mode='valid', subsample=(1, 1), dim_ordering='default', W_regularizer=<b>None</b>,
+b_regularizer=<b>None</b>, activity_regularizer=<b>None</b>, W_constraint=<b>None</b>,
+b_constraint=<b>None</b>, bias=<b>True</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Convolution operator for filtering windows
+of two-dimensional inputs. When using this layer as the first layer in a model,
+provide the keyword argument&nbsp;input_shape&nbsp;(tuple of integers, does not
+include the sample axis), e.g.&nbsp;input_shape=(3, 128, 128)&nbsp;for 128x128
+RGB pictures.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Examples</span></b></p>
+
+<p class=MsoNormal><i><span lang=EN-US># apply a 3x3 convolution with 64 output
+filters on a 256x256 image:</span></i></p>
+
+<p class=MsoNormal><span lang=EN-US>model = Sequential()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>model.add(Convolution2D(64, 3, 3,
+border_mode='same', input_shape=(3, 256, 256)))</span></p>
+
+<p class=MsoNormal><i><span lang=EN-US># now model.output_shape == (None, 64,
+256, 256)</span></i></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><i><span lang=EN-US># add a 3x3 convolution on top, with 32
+output filters:</span></i></p>
+
+<p class=MsoNormal><span lang=EN-US>model.add(Convolution2D(32, 3, 3,
+border_mode='same'))</span></p>
+
+<p class=MsoNormal><i><span lang=EN-US># now model.output_shape == (None, 32,
+256, 256)</span></i></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>nb_filter</span></b><span lang=EN-US>:
+     Number of convolution filters to use.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_row</span></b><span lang=EN-US>:
+     Number of rows in the convolution kernel.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_col</span></b><span lang=EN-US>:
+     Number of columns in the convolution kernel.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>init</span></b><span lang=EN-US>: name
+     of initialization function for the weights of the layer (see&nbsp;<a
+     href="https://keras.io/initializations/">initializations</a>), or
+     alternatively, Theano function to use for weights initialization. This
+     parameter is only relevant if you don't pass a&nbsp;weights&nbsp;argument.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>activation</span></b><span lang=EN-US>:
+     name of activation function to use (see&nbsp;<a
+     href="https://keras.io/activations/">activations</a>), or alternatively,
+     elementwise Theano function. If you don't specify anything, no activation
+     is applied (ie. &quot;linear&quot; activation: a(x) = x).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>weights</span></b><span lang=EN-US>:
+     list of numpy arrays to set as initial weights.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>border_mode</span></b><span
+     lang=EN-US>: 'valid', 'same' or 'full'. ('full' requires the Theano
+     backend.)</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>subsample</span></b><span lang=EN-US>:
+     tuple of length 2. Factor by which to subsample output. Also called
+     strides elsewhere.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>W_regularizer</span></b><span
+     lang=EN-US>: instance of&nbsp;<a href="https://keras.io/regularizers/">WeightRegularizer</a>&nbsp;(eg.
+     L1 or L2 regularization), applied to the main weights matrix.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>b_regularizer</span></b><span
+     lang=EN-US>: instance of&nbsp;<a href="https://keras.io/regularizers/">WeightRegularizer</a>,
+     applied to the bias.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>activity_regularizer</span></b><span
+     lang=EN-US>: instance of&nbsp;<a href="https://keras.io/regularizers/">ActivityRegularizer</a>,
+     applied to the network output.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>W_constraint</span></b><span
+     lang=EN-US>: instance of the&nbsp;<a href="https://keras.io/constraints/">constraints</a>&nbsp;module
+     (eg. maxnorm, nonneg), applied to the main weights matrix.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>b_constraint</span></b><span
+     lang=EN-US>: instance of the&nbsp;<a href="https://keras.io/constraints/">constraints</a>&nbsp;module,
+     applied to the bias.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>dim_ordering</span></b><span
+     lang=EN-US>: 'th' or 'tf'. In 'th' mode, the channels dimension (the
+     depth) is at index 1, in 'tf' mode is it at index 3. It defaults to
+     the&nbsp;image_dim_ordering&nbsp;value found in your Keras config file
+     at&nbsp;~/.keras/keras.json. If you never set it, then it will be
+     &quot;tf&quot;.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>bias</span></b><span lang=EN-US>:
+     whether to include a bias (i.e. make the layer affine rather than linear).</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Input shape</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>4D tensor with shape:&nbsp;(samples,
+channels, rows, cols)&nbsp;if dim_ordering='th' or 4D tensor with
+shape:(samples, rows, cols, channels)&nbsp;if dim_ordering='tf'.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Output shape</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>4D tensor with shape:&nbsp;(samples,
+nb_filter, new_rows, new_cols)&nbsp;if dim_ordering='th' or 4D tensor with
+shape:(samples, new_rows, new_cols, nb_filter)&nbsp;if
+dim_ordering='tf'.&nbsp;rows&nbsp;and&nbsp;cols&nbsp;values might have changed
+due to padding.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>&nbsp;</span></b></p>
+
+<h2><span lang=EN-US>MaxPooling2D</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>keras.layers.pooling.MaxPooling2D(pool_size=(2,
+2), strides=<b>None</b>, border_mode='valid', dim_ordering='default')</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Max pooling operation for spatial data.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>pool_size</span></b><span lang=EN-US>:
+     tuple of 2 integers, factors by which to downscale (vertical, horizontal).
+     (2, 2) will halve the image in each dimension.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>strides</span></b><span lang=EN-US>:
+     tuple of 2 integers, or None. Strides values. If None, it will default
+     to&nbsp;pool_size.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>border_mode</span></b><span
+     lang=EN-US>: 'valid' or 'same'.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>dim_ordering</span></b><span
+     lang=EN-US>: 'th' or 'tf'. In 'th' mode, the channels dimension (the
+     depth) is at index 1, in 'tf' mode is it at index 3. It defaults to
+     the&nbsp;image_dim_ordering&nbsp;value found in your Keras config file
+     at&nbsp;~/.keras/keras.json. If you never set it, then it will be
+     &quot;tf&quot;.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Input shape</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>4D tensor with shape:&nbsp;(samples,
+channels, rows, cols)&nbsp;if dim_ordering='th' or 4D tensor with
+shape:(samples, rows, cols, channels)&nbsp;if dim_ordering='tf'.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Output shape</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>4D tensor with shape:&nbsp;(nb_samples,
+channels, pooled_rows, pooled_cols)&nbsp;if dim_ordering='th' or 4D tensor with
+shape:&nbsp;(samples, pooled_rows, pooled_cols, channels)&nbsp;if
+dim_ordering='tf'.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><span lang=EN-US>Dropout</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>keras.layers.core.Dropout(p)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Applies Dropout to the input. Dropout
+consists in randomly setting a fraction&nbsp;p&nbsp;of input units to 0 at each
+update during training time, which helps prevent overfitting.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>p</span></b><span lang=EN-US>: float
+     between 0 and 1. Fraction of the input units to drop.</span></li>
+</ul>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Flatten</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>keras.layers.core.Flatten()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Flattens the input. Does not affect the
+batch size.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Example</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>model = Sequential()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>model.add(Convolution2D(64, 3, 3,</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+border_mode='same',</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+input_shape=(3, 32, 32)))</span></p>
+
+<p class=MsoNormal><i><span lang=EN-US># now: model.output_shape == (None, 64,
+32, 32)</span></i></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>model.add(Flatten())</span></p>
+
+<p class=MsoNormal><i><span lang=EN-US># now: model.output_shape == (None,
+65536)</span></i></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:宋体'>‘</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h1><span lang=EN-US>The Sequential model API</span></h1>
+
+<p class=MsoNormal><span lang=EN-US>To get started, read&nbsp;<a
+href="https://keras.io/getting-started/sequential-model-guide">this guide to
+the Keras Sequential model</a>.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Useful attributes of Model</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=EN-US>model.layers&nbsp;is a list of the layers
+     added to the model.</span></li>
+</ul>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<p class=MsoNormal><b><span lang=EN-US>Sequential model methods</span></b></p>
+
+<h2><span lang=EN-US>compile</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>compile(self, optimizer, loss, metrics=<b>None</b>,
+sample_weight_mode=<b>None</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Configures the learning process.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>optimizer</span></b><span lang=EN-US>:
+     str (name of optimizer) or optimizer object. See&nbsp;<a
+     href="https://keras.io/optimizers">optimizers</a>.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>loss</span></b><span lang=EN-US>: str
+     (name of objective function) or objective function. See&nbsp;<a
+     href="https://keras.io/objectives">objectives</a>.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>metrics</span></b><span lang=EN-US>:
+     list of metrics to be evaluated by the model during training and testing.
+     Typically you will use&nbsp;metrics=['accuracy']. See&nbsp;<a
+     href="https://keras.io/metrics">metrics</a>.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>sample_weight_mode</span></b><span
+     lang=EN-US>: if you need to do timestep-wise sample weighting (2D
+     weights), set this to &quot;temporal&quot;. &quot;None&quot; defaults to
+     sample-wise weights (1D).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>kwargs</span></b><span lang=EN-US>:
+     for Theano backend, these are passed into K.function. Ignored for
+     Tensorflow backend.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Example</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; model = Sequential()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; model.add(Dense(32,
+input_shape=(500,)))</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; model.add(Dense(10,
+activation='softmax'))</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;
+model.compile(optimizer='rmsprop',</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+loss='categorical_crossentropy',</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+metrics=['accuracy'])</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>fit</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>fit(self, x, y, batch_size=32, nb_epoch=10,
+verbose=1, callbacks=<b>None</b>, validation_split=0.0, validation_data=<b>None</b>,
+shuffle=<b>True</b>, class_weight=<b>None</b>, sample_weight=<b>None</b>,
+initial_epoch=0)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Trains the model for a fixed number of
+epochs.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input
+     data, as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>y</span></b><span lang=EN-US>: labels,
+     as a Numpy array.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>batch_size</span></b><span lang=EN-US>:
+     integer. Number of samples per gradient update.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_epoch</span></b><span lang=EN-US>:
+     integer, the number of epochs to train the model.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>: 0
+     for no logging to stdout, 1 for progress bar logging, 2 for one log line
+     per epoch.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>callbacks</span></b><span lang=EN-US>:
+     list of&nbsp;keras.callbacks.Callback&nbsp;instances. List of callbacks to
+     apply during training. See&nbsp;<a href="https://keras.io/callbacks">callbacks</a>.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>validation_split</span></b><span
+     lang=EN-US>: float (0. &lt; x &lt; 1). Fraction of the data to use as
+     held-out validation data.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>validation_data</span></b><span
+     lang=EN-US>: tuple (x_val, y_val) or tuple (x_val, y_val,
+     val_sample_weights) to be used as held-out validation data. Will override
+     validation_split.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>shuffle</span></b><span lang=EN-US>:
+     boolean or str (for 'batch'). Whether to shuffle the samples at each
+     epoch. 'batch' is a special option for dealing with the limitations of
+     HDF5 data; it shuffles in batch-sized chunks.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>class_weight</span></b><span
+     lang=EN-US>: dictionary mapping classes to a weight value, used for
+     scaling the loss function (during training only).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>sample_weight</span></b><span
+     lang=EN-US>: Numpy array of weights for the training samples, used for
+     scaling the loss function (during training only). You can either pass a
+     flat (1D) Numpy array with the same length as the input samples</span></li>
+</ul>
+
+<ul style='margin-top:0cm' type=disc>
+ <ul style='margin-top:0cm' type=circle>
+  <li class=MsoNormal><b><span lang=EN-US>(1</span></b><span lang=EN-US>:1
+      mapping between weights and samples), or in the case of temporal data,
+      you can pass a 2D array with shape (samples, sequence_length), to apply a
+      different weight to every timestep of every sample. In this case you
+      should make sure to specify sample_weight_mode=&quot;temporal&quot; in
+      compile().</span></li>
+ </ul>
+ <li class=MsoNormal><b><span lang=EN-US>initial_epoch</span></b><span
+     lang=EN-US>: epoch at which to start training (useful for resuming a
+     previous training run)</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A&nbsp;History&nbsp;object.
+Its&nbsp;History.history&nbsp;attribute is a record of training loss values and
+metrics values at successive epochs, as well as validation loss values and
+validation metrics values (if applicable).</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>evaluate</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>evaluate(self, x, y, batch_size=32,
+verbose=1, sample_weight=<b>None</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Computes the loss on some input data, batch
+by batch.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input data,
+     as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>y</span></b><span lang=EN-US>: labels,
+     as a Numpy array.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>batch_size</span></b><span lang=EN-US>:
+     integer. Number of samples per gradient update.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>:
+     verbosity mode, 0 or 1.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>sample_weight</span></b><span
+     lang=EN-US>: sample weights, as a Numpy array.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>Scalar test loss (if the model has no
+metrics) or list of scalars (if the model computes other metrics). The
+attribute&nbsp;model.metrics_names&nbsp;will give you the display labels for
+the scalar outputs.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<p class=MsoNormal><b><span lang=EN-US>predict</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>predict(self, x, batch_size=32, verbose=0)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Generates output predictions for the input
+samples, processing the samples in a batched way.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: the
+     input data, as a Numpy array.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>batch_size</span></b><span lang=EN-US>:
+     integer.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>:
+     verbosity mode, 0 or 1.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A Numpy array of predictions.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>predict_classes</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>predict_classes(self, x, batch_size=32,
+verbose=1)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Generate class predictions for the input
+samples batch by batch.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input
+     data, as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>batch_size</span></b><span lang=EN-US>:
+     integer.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>:
+     verbosity mode, 0 or 1.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A numpy array of class predictions.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>predict_proba</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>predict_proba(self, x, batch_size=32,
+verbose=1)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Generates class probability predictions for
+the input samples batch by batch.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input
+     data, as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>batch_size</span></b><span lang=EN-US>:
+     integer.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>:
+     verbosity mode, 0 or 1.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A Numpy array of probability predictions.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>train_on_batch</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>train_on_batch(self, x, y, class_weight=<b>None</b>,
+sample_weight=<b>None</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Single gradient update over one batch of
+samples.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input
+     data, as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>y</span></b><span lang=EN-US>: labels,
+     as a Numpy array.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>class_weight</span></b><span
+     lang=EN-US>: dictionary mapping classes to a weight value, used for
+     scaling the loss function (during training only).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>sample_weight</span></b><span
+     lang=EN-US>: sample weights, as a Numpy array.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>Scalar training loss (if the model has no
+metrics) or list of scalars (if the model computes other metrics). The
+attribute&nbsp;model.metrics_names&nbsp;will give you the display labels for the
+scalar outputs.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>test_on_batch</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>test_on_batch(self, x, y, sample_weight=<b>None</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Evaluates the model over a single batch of
+samples.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>x</span></b><span lang=EN-US>: input
+     data, as a Numpy array or list of Numpy arrays (if the model has multiple
+     inputs).</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>y</span></b><span lang=EN-US>: labels,
+     as a Numpy array.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>sample_weight</span></b><span
+     lang=EN-US>: sample weights, as a Numpy array.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>Scalar test loss (if the model has no
+metrics) or list of scalars (if the model computes other metrics). The
+attribute&nbsp;model.metrics_names&nbsp;will give you the display labels for
+the scalar outputs.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>predict_on_batch</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>predict_on_batch(self, x)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Returns predictions for a single batch of
+samples.</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>fit_generator</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>fit_generator(self, generator,
+samples_per_epoch, nb_epoch, verbose=1, callbacks=<b>None</b>, validation_data=<b>None</b>,
+nb_val_samples=<b>None</b>, class_weight=<b>None</b>, max_q_size=10,
+nb_worker=1, pickle_safe=<b>False</b>, initial_epoch=0)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Fits the model on data generated
+batch-by-batch by a Python generator. The generator is run in parallel to the
+model, for efficiency. For instance, this allows you to do real-time data
+augmentation on images on CPU in parallel to training your model on GPU.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>generator</span></b><span lang=EN-US>:
+     a generator. The output of the generator must be either</span></li>
+</ul>
+
+<ul style='margin-top:0cm' type=disc>
+ <ul style='margin-top:0cm' type=circle>
+  <li class=MsoNormal><span lang=EN-US>a tuple (inputs, targets)</span></li>
+  <li class=MsoNormal><span lang=EN-US>a tuple (inputs, targets,
+      sample_weights). All arrays should contain the same number of samples.
+      The generator is expected to loop over its data indefinitely. An epoch
+      finishes when&nbsp;samples_per_epoch&nbsp;samples have been seen by the
+      model.</span></li>
+ </ul>
+ <li class=MsoNormal><b><span lang=EN-US>samples_per_epoch</span></b><span
+     lang=EN-US>: integer, number of samples to process before going to the
+     next epoch.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_epoch</span></b><span lang=EN-US>:
+     integer, total number of iterations on the data.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>verbose</span></b><span lang=EN-US>:
+     verbosity mode, 0, 1, or 2.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>callbacks</span></b><span lang=EN-US>:
+     list of callbacks to be called during training.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>validation_data</span></b><span
+     lang=EN-US>: this can be either</span></li>
+</ul>
+
+<ul style='margin-top:0cm' type=disc>
+ <ul style='margin-top:0cm' type=circle>
+  <li class=MsoNormal><span lang=EN-US>a generator for the validation data</span></li>
+  <li class=MsoNormal><span lang=EN-US>a tuple (inputs, targets)</span></li>
+  <li class=MsoNormal><span lang=EN-US>a tuple (inputs, targets,
+      sample_weights).</span></li>
+ </ul>
+ <li class=MsoNormal><b><span lang=EN-US>nb_val_samples</span></b><span
+     lang=EN-US>: only relevant if&nbsp;validation_data&nbsp;is a generator.
+     number of samples to use from validation generator at the end of every
+     epoch.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>class_weight</span></b><span
+     lang=EN-US>: dictionary mapping class indices to a weight for the class.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>max_q_size</span></b><span lang=EN-US>:
+     maximum size for the generator queue</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_worker</span></b><span lang=EN-US>:
+     maximum number of processes to spin up</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>pickle_safe</span></b><span
+     lang=EN-US>: if True, use process based threading. Note that because this
+     implementation relies on multiprocessing, you should not pass non
+     picklable arguments to the generator as they can't be passed easily to
+     children processes.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>initial_epoch</span></b><span
+     lang=EN-US>: epoch at which to start training (useful for resuming a
+     previous training run)</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A&nbsp;History&nbsp;object.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Example</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN-US>def</span></b><span lang=EN-US> <b>generate_arrays_from_file</b>(path):</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; <b>while</b> 1:</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; &nbsp;&nbsp;f = open(path)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; <b>for</b> line <b>in</b>
+f:</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>#
+create Numpy arrays of input data</i></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>#
+and labels, from each line in the file</i></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x, y = process_line(line)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>yield</b>
+(x, y)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; f.close()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>model.fit_generator(generate_arrays_from_file('/my_file.txt'),</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+samples_per_epoch=10000, nb_epoch=10)</span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<h2><span lang=EN-US>evaluate_generator</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>evaluate_generator(self, generator,
+val_samples, max_q_size=10, nb_worker=1, pickle_safe=<b>False</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Evaluates the model on a data generator.
+The generator should return the same kind of data as accepted
+by&nbsp;test_on_batch.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>generator</span></b><span lang=EN-US>:
+     generator yielding tuples (inputs, targets) or (inputs, targets,
+     sample_weights)</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>val_samples</span></b><span
+     lang=EN-US>: total number of samples to generate from&nbsp;generator&nbsp;before
+     returning.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>max_q_size</span></b><span lang=EN-US>:
+     maximum size for the generator queue</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_worker</span></b><span lang=EN-US>:
+     maximum number of processes to spin up</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>pickle_safe</span></b><span
+     lang=EN-US>: if True, use process based threading. Note that because this
+     implementation relies on multiprocessing, you should not pass non non
+     picklable arguments to the generator as they can't be passed easily to
+     children processes.</span></li>
+</ul>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US>
+
+<hr size=1 width="100%" noshade style='color:#404040' align=center>
+
+</span></div>
+
+<p class=MsoNormal><b><span lang=EN-US>predict_generator</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>predict_generator(self, generator,
+val_samples, max_q_size=10, nb_worker=1, pickle_safe=<b>False</b>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Generates predictions for the input samples
+from a data generator. The generator should return the same kind of data as
+accepted by&nbsp;predict_on_batch.</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Arguments</span></b></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>generator</span></b><span lang=EN-US>:
+     generator yielding batches of input samples.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>val_samples</span></b><span
+     lang=EN-US>: total number of samples to generate
+     from&nbsp;generator&nbsp;before returning.</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>max_q_size</span></b><span lang=EN-US>:
+     maximum size for the generator queue</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>nb_worker</span></b><span lang=EN-US>:
+     maximum number of processes to spin up</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>pickle_safe</span></b><span
+     lang=EN-US>: if True, use process based threading. Note that because this
+     implementation relies on multiprocessing, you should not pass non non
+     picklable arguments to the generator as they can't be passed easily to
+     children processes.</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Returns</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>A Numpy array of predictions.</span></p>
+
+<h1><span lang=EN-US>Usage of regularizers</span></h1>
+
+<p class=MsoNormal><span lang=EN-US>Regularizers allow to apply penalties on
+layer parameters or layer activity during optimization. These penalties are incorporated
+in the loss function that the network optimizes.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>The penalties are applied on a per-layer
+basis. The exact API will depend on the layer, but the
+layers&nbsp;Dense,&nbsp;TimeDistributedDense,&nbsp;MaxoutDense,&nbsp;Convolution1D,&nbsp;Convolution2D&nbsp;and&nbsp;Convolution3D&nbsp;have
+a unified API.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>These layers expose 3 keyword arguments:</span></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><span lang=EN-US>W_regularizer: instance
+     of&nbsp;keras.regularizers.WeightRegularizer</span></li>
+ <li class=MsoNormal><span lang=EN-US>b_regularizer: instance
+     of&nbsp;keras.regularizers.WeightRegularizer</span></li>
+ <li class=MsoNormal><span lang=EN-US>activity_regularizer: instance
+     of&nbsp;keras.regularizers.ActivityRegularizer</span></li>
+</ul>
+
+<p class=MsoNormal><b><span lang=EN-US>Example</span></b></p>
+
+<p class=MsoNormal><b><span lang=EN-US>from</span></b><span lang=EN-US>
+keras.regularizers <b>import</b> l2, activity_l2</span></p>
+
+<p class=MsoNormal><span lang=EN-US>model.add(Dense(64, input_dim=64,
+W_regularizer=l2(0.01), activity_regularizer=activity_l2(0.01)))</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Available penalties</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>keras.regularizers.WeightRegularizer(l1=0.,
+l2=0.)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>keras.regularizers.ActivityRegularizer(l1=0.,
+l2=0.)</span></p>
+
+<p class=MsoNormal><b><span lang=EN-US>Shortcuts</span></b></p>
+
+<p class=MsoNormal><span lang=EN-US>These are shortcut functions available
+in&nbsp;keras.regularizers.</span></p>
+
+<ul style='margin-top:0cm' type=disc>
+ <li class=MsoNormal><b><span lang=EN-US>l1</span></b><span lang=EN-US>(l=0.01):
+     L1 weight regularization penalty, also known as LASSO</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>l2</span></b><span lang=EN-US>(l=0.01):
+     L2 weight regularization penalty, also known as weight decay, or Ridge</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>l1l2</span></b><span lang=EN-US>(l1=0.01,
+     l2=0.01): L1-L2 weight regularization penalty, also known as ElasticNet</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>activity_l1</span></b><span
+     lang=EN-US>(l=0.01): L1 activity regularization</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>activity_l2</span></b><span
+     lang=EN-US>(l=0.01): L2 activity regularization</span></li>
+ <li class=MsoNormal><b><span lang=EN-US>activity_l1l2</span></b><span
+     lang=EN-US>(l1=0.01, l2=0.01): L1+L2 activity regularization</span></li>
+</ul>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
